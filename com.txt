@@ -1,0 +1,2 @@
+-p "noble" --repo-url "http://ru.archive.ubuntu.com/ubuntu" --test-mode "off" --ascii-tree "off" --filter "abccdb"
+-p "jammy" --repo-url "http://ru.archive.ubuntu.com/ubuntu"

@@ -120,8 +120,7 @@ def parse_repo_url(url, package):
 		with gzip.open(gettempdir() + "\\Packages.gz", "rt", encoding="utf-8") as f:
 			return f.read()
 	except Exception as e:
-		print(e)
-		return 0
+		return ""
 
 def load_packages(text):
 	packages = {}
@@ -138,7 +137,11 @@ def main(argv=None):
 	try:
 		args = parse_args(argv)
 		validate_args(args)
-		print(load_packages(parse_repo_url(args.repo_url, args.package)))
+		pars = parse_repo_url(args.repo_url, args.package)
+		if pars:
+			print(load_packages(pars))
+		else:
+			print("Не удалось найти пакет")
 	except SystemExit as e:
 		# argparse использует SystemExit если код != 0 — считаем это ошибкой парсинга
 		if e.code != 0:
