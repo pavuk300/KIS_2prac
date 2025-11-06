@@ -2,6 +2,9 @@ import argparse
 import os
 import sys
 import re
+import gzip
+from tempfile import gettempdir
+from urllib import request
 
 def error(msg): # Вывод ошибки
 	print(f"Ошибка: {msg}", file=sys.stderr)
@@ -108,11 +111,34 @@ def print_config(args): # Вывод в формате ключ=значение
 		if v:
 			print(f"{k}={v!s}")
 
+def parse_repo_url(url, package):
+	url += "/dists/" + package + "/main/binary-amd64/Packages.gz"
+	try:
+		#prs = request.urlopen(url).read().decode("utf-8")
+		#print(prs)
+		request.urlretrieve(url, gettempdir() + "\\Packages.gz")
+		with gzip.open(gettempdir() + "\\Packages.gz", "rt", encoding="utf-8") as f:
+			return f.read()
+	except Exception as e:
+		print(e)
+		return 0
+
+def load_packages(text):
+	packages = {}
+	for line in text.split("\n"):
+		if line.startswith('Package:'):
+			name = line.split()[1]
+			packages[name] = set()
+		elif re.match(r'(Pre-|)Depends:', line):
+			deps = re.sub(r'(Pre-|)Depends:|:any|,|\||\([^,]+\)', ' ', line)
+			packages[name] |= set(deps.split())
+	return packages
+
 def main(argv=None):
 	try:
 		args = parse_args(argv)
 		validate_args(args)
-		print_config(args)
+		print(load_packages(parse_repo_url(args.repo_url, args.package)))
 	except SystemExit as e:
 		# argparse использует SystemExit если код != 0 — считаем это ошибкой парсинга
 		if e.code != 0:
