@@ -1,2 +1,1 @@
--p "noble" --repo-url "http://ru.archive.ubuntu.com/ubuntu" --test-mode "off" --ascii-tree "off" --filter "abccdb"
--p "jammy" --repo-url "http://ru.archive.ubuntu.com/ubuntu"
+python main.py -p "vim" --repo-url "http://ru.archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/" --test-mode "off" --ascii-tree "off" --filter "abccdb"

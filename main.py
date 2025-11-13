@@ -5,9 +5,6 @@ import re
 import gzip
 from tempfile import gettempdir
 from urllib import request
-import yedextended as yed
-import networkx as nx
-import matplotlib.pyplot as plt
 
 def error(msg): # Вывод ошибки
 	print(f"Ошибка: {msg}", file=sys.stderr)
@@ -145,6 +142,9 @@ def make_graph(root, packages):
 	return graph
 
 def viz(graph, main):
+	import yedextended as yed
+	import networkx as nx
+	import matplotlib.pyplot as plt
 	y = yed.Graph()
 
 	nodes = {main: y.add_node(main)}
