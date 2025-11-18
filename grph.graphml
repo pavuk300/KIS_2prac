@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+<key for="node" id="d0" yfiles.type="nodegraphics"/>
+<key for="edge" id="d1" yfiles.type="edgegraphics"/>
+<graph id="G" edgedefault="directed">
+<node id="0">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">vim</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="1">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libgpm2</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="2">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libacl1</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="3">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libc6</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="4">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libsodium23</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="5">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libtinfo6</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="6">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libpython3.10</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="7">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">libselinux1</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="8">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">vim-runtime</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<node id="9">
+<data key="d0">
+<y:ShapeNode>
+<y:Geometry x="0" y="0" width="50" height="25"/>
+<y:Fill color="#ffffff"/>
+<y:BorderStyle color="#000000" width="1" hasColor="true"/>
+<y:NodeLabel fontFamily="Times New Roman" fontSize="12" alignment="center" textColor="#000000">vim-common</y:NodeLabel>
+<y:Shape type="box"/>
+</y:ShapeNode>
+</data>
+</node>
+<edge directed="true" source="0" target="1">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="2">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="3">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="4">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="5">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="6">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="7">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="8">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="0" target="9">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="4" target="3">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="5" target="3">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="6" target="3">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+<edge directed="true" source="7" target="3">
+<data key="d1">
+<y:PolyLineEdge>
+<y:LineStyle color="#000000" type="line" width="1"/>
+<y:Arrows source="none" target="delta"/>
+<y:EdgeLabel fontFamily="Arial" fontSize="12" alignment="center" textColor="#000000"></y:EdgeLabel>
+</y:PolyLineEdge>
+</data>
+</edge>
+</graph>
+</graphml>

@@ -6,9 +6,12 @@ import gzip
 from tempfile import gettempdir
 from urllib import request
 
+import yed
+
 def error(msg): # Вывод ошибки
 	print(f"Ошибка: {msg}", file=sys.stderr)
 	sys.exit(2)
+
 
 def is_valid_url(url: str): # Проверка URL
 	regex_pattern = re.compile(
@@ -17,6 +20,7 @@ def is_valid_url(url: str): # Проверка URL
 		r"(?::\d+)?"
 		r"(?:/?|[/?]\S+)$", re.IGNORECASE)
 	return re.match(regex_pattern, url) is not None
+
 
 def parse_args(argv=None): # Парсин аргументов
 	parser = argparse.ArgumentParser() # Парсер аргументов командной строки
@@ -67,6 +71,7 @@ def parse_args(argv=None): # Парсин аргументов
 	args = parser.parse_args(argv)
 	return args
 
+
 def validate_args(args):
 	# package: не пустое без пробелов
 	if not args.package or not args.package.strip():
@@ -97,6 +102,7 @@ def validate_args(args):
 	if not isinstance(args.max_depth, int) or args.max_depth < 0:
 		error("--max-depth должен быть целым числом >= 0.")
 
+
 def print_config(args): # Вывод в формате ключ=значение
 	cfg = {
 		"package": args.package,
@@ -111,7 +117,8 @@ def print_config(args): # Вывод в формате ключ=значение
 		if v:
 			print(f"{k}={v!s}")
 
-def parse_repo_url(url, package):
+
+def parse_repo_url(url, package): #parse url repo
 	try:
 		request.urlretrieve(url + "/Packages.gz", gettempdir() + "\\Packages.gz")
 		with gzip.open(gettempdir() + "\\Packages.gz", "rt", encoding="utf-8") as f:
@@ -119,14 +126,16 @@ def parse_repo_url(url, package):
 	except Exception as e:
 		raise ValueError("Invalid repo")
 
-def parse_path_repo(path, package):
+
+def parse_path_repo(path, package): #parse path repo
 	try:
 		with open(path, "rt", encoding="utf-8") as f:
 			return f.read()
 	except Exception as e:
 		raise ValueError("Invalid repo")
 
-def load_packages(text):
+
+def load_packages(text): # load packs from package file
 	packages = {}
 	for line in text.split("\n"):
 		if line.startswith('Package:'):
@@ -137,7 +146,8 @@ def load_packages(text):
 			packages[name] |= set(deps.split())
 	return packages
 
-def make_graph(root, packages, dep, fl):
+
+def make_graph(root, packages, dep, fl): # create dependations graph
 	def dfs(name, depth = dep, filter = fl):
 		if depth:
 			graph[name] = set()
@@ -145,44 +155,44 @@ def make_graph(root, packages, dep, fl):
 				if filter not in dep:
 					if dep not in graph:
 						dfs(dep, depth - 1)
-					graph[name].add(dep)
+					if dep in seen:
+						graph[name].add(dep)
+			seen.add(name)
 		else:
 			return
+	seen = set()
 	graph = {}
 	dfs(root)
 	return graph
 
-def viz(graph, main):
-	import yedextended as yed
-	import networkx as nx
-	import matplotlib.pyplot as plt
+
+def viz(graph, path): # yED generator(not used)
 	y = yed.Graph()
+	nodes = {}
+	for name in graph:
+		nodes[name] = y.node(text=name, font_family='Times New Roman', shape='box', height=25)
+	for name, deps in graph.items():
+		for dep in deps:
+			y.edge(nodes[name], nodes[dep])
+	y.save(f'{path}.graphml')
 
-	nodes = {main: y.add_node(main)}
-	for name, deb in graph.items():
-		if name == main:
-			continue
-		nodes[name] = y.add_node(name)
-		y.add_edge(nodes[main], nodes[name])
-		for n in deb:
-			nodes[n] = y.add_node(n)
-			y.add_edge(nodes[name], nodes[n])
-	G = nx.DiGraph()
-	for src, deps in graph.items():
-		for dst in deps:
-			G.add_edge(src, dst)
 
-	pos = nx.spring_layout(G, k=0.8, iterations=50)
-	plt.figure(figsize=(8, 6))
-	nx.draw(G, pos, with_labels=True, node_color="lightblue", node_size=1000,
-			font_size=10, arrowsize=15)
-	plt.title("Граф зависимостей пакета", fontsize=14)
-	plt.axis("off")
-	plt.show()
-	#y.persist_graph(f"{main}.graphml")
+def print_ascii_tree(graph, root, prefix=""): # ascii tree generator
+	print(prefix + root)
+	for dep in graph.get(root, []):
+		print_ascii_tree(graph, dep, prefix + "  ├─ ")
+
+
+d = ["@startwbs"]
+def graph_to_plantuml(graph, root, prefix="*"): # Uml generator
+	global d
+	d += [prefix + " " + root]
+	for dep in graph.get(root, []):
+		graph_to_plantuml(graph, dep, prefix + "*")
 
 def main(argv=None):
 	try:
+		global d
 		args = parse_args(argv)
 		validate_args(args)
 		if not args.repo_path:
@@ -191,9 +201,8 @@ def main(argv=None):
 			pars = parse_path_repo(args.repo_path, args.package)
 		packs = load_packages(pars)
 		if args.package in packs:
-			args.max_depth = 1000
-			args.filter_substr = "asdasdasda"
 			graph = make_graph(args.package, packs, args.max_depth, args.filter_substr)
+			#stage 4
 			mas = []
 			stage = 5
 			if stage == 4:
@@ -202,6 +211,15 @@ def main(argv=None):
 						if j not in mas:
 							mas += [j]
 				print("\n".join(mas))
+			# planetUML http://editor.plantuml.com/
+			with open("grph.txt", 'w') as f:
+				graph_to_plantuml(graph, args.package)
+				d += ["@endwbs"]
+				f.write("\n".join(d))
+				print("\n".join(d) + "\n")
+			# ascii-tree
+			if args.ascii_tree:
+				print_ascii_tree(graph, args.package)
 		else:
 			print("Пакет отсутствует")
 	except SystemExit as e:
