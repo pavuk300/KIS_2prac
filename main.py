@@ -39,7 +39,7 @@ def parse_args(argv=None): # Парсин аргументов
 	# Режим работы с тестовым репозиторием
 	parser.add_argument(
 		"--test-mode",
-		choices=["off", "readonly", "simulate"],
+		choices=["off", "on"],
 		default="off"
 	)
 
@@ -119,6 +119,13 @@ def parse_repo_url(url, package):
 	except Exception as e:
 		raise ValueError("Invalid repo")
 
+def parse_path_repo(path, package):
+	try:
+		with open(path, "rt", encoding="utf-8") as f:
+			return f.read()
+	except Exception as e:
+		raise ValueError("Invalid repo")
+
 def load_packages(text):
 	packages = {}
 	for line in text.split("\n"):
@@ -130,13 +137,17 @@ def load_packages(text):
 			packages[name] |= set(deps.split())
 	return packages
 
-def make_graph(root, packages):
-	def dfs(name):
-		graph[name] = set()
-		for dep in packages.get(name, set()):
-			if dep not in graph:
-				dfs(dep)
-			graph[name].add(dep)
+def make_graph(root, packages, dep, fl):
+	def dfs(name, depth = dep, filter = fl):
+		if depth:
+			graph[name] = set()
+			for dep in packages.get(name, set()):
+				if filter not in dep:
+					if dep not in graph:
+						dfs(dep, depth - 1)
+					graph[name].add(dep)
+		else:
+			return
 	graph = {}
 	dfs(root)
 	return graph
@@ -174,12 +185,23 @@ def main(argv=None):
 	try:
 		args = parse_args(argv)
 		validate_args(args)
-		pars = parse_repo_url(args.repo_url, args.package)
+		if not args.repo_path:
+			pars = parse_repo_url(args.repo_url, args.package)
+		else:
+			pars = parse_path_repo(args.repo_path, args.package)
 		packs = load_packages(pars)
 		if args.package in packs:
-			graph = make_graph(args.package, packs)
-			print(graph[args.package])
-			#viz(graph, args.package)
+			args.max_depth = 1000
+			args.filter_substr = "asdasdasda"
+			graph = make_graph(args.package, packs, args.max_depth, args.filter_substr)
+			mas = []
+			stage = 5
+			if stage == 4:
+				for i in reversed(graph):
+					for j in graph[i]:
+						if j not in mas:
+							mas += [j]
+				print("\n".join(mas))
 		else:
 			print("Пакет отсутствует")
 	except SystemExit as e:
