@@ -1,15 +1,8 @@
 @startwbs
-* vim
-** libacl1
-** libpython3.10
-** libselinux1
-** vim-common
-** vim-runtime
+* acct
+** lsb-base
 ** libc6
-** libsodium23
-*** libc6
-** libtinfo6
-*** libc6
-** libgpm2
-*** libc6
+*** libgcc-s1
+**** gcc-12-base
+*** libcrypt1
 @endwbs

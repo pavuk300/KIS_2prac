@@ -1,11 +1,11 @@
 python main.py -p "vim" --repo-url "http://ru.archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/" --test-mode "off" --ascii-tree "off" --filter "abccdb"
 
 python main.py -p "vim" --repo-url "http://ru.archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/" --test-mode "off" --ascii-tree "off" --filter "libc" --max-depth 2
-python main.py -p "vim" --repo-path "C:\nitro\wrk\kis\prac2\Packages" --test-mode "on" --ascii-tree "off" --filter "lib" --max-depth 2
+python main.py -p "vim" --repo-path "Packages" --test-mode "on" --ascii-tree "off" --filter "lib" --max-depth 2
 
-python main.py -p "accountsservice" --repo-path "C:\nitro\wrk\kis\prac2\Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
-python main.py -p "acl" --repo-path "C:\nitro\wrk\kis\prac2\Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
-python main.py -p "vim" --repo-path "C:\nitro\wrk\kis\prac2\Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
+python main.py -p "accountsservice" --repo-path "Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
+python main.py -p "acl" --repo-path "Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
+python main.py -p "vim" --repo-path "Packages" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
 
 python main.py -p "accountsservice" --repo-url "http://ru.archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
 python main.py -p "acl" --repo-url "http://ru.archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/" --test-mode "on" --ascii-tree "on" --filter "ababab" --max-depth 100
