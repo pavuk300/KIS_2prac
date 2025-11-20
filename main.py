@@ -118,20 +118,20 @@ def print_config(args): # Вывод в формате ключ=значение
 			print(f"{k}={v!s}")
 
 
-def parse_repo_url(url, package): #parse url repo
+def parse_repo_url(url): #parse url repo
 	try:
 		request.urlretrieve(url + "/Packages.gz", gettempdir() + "\\Packages.gz")
 		with gzip.open(gettempdir() + "\\Packages.gz", "rt", encoding="utf-8") as f:
 			return f.read()
-	except Exception as e:
+	except Exception:
 		raise ValueError("Invalid repo")
 
 
-def parse_path_repo(path, package): #parse path repo
+def parse_path_repo(path): #parse path repo
 	try:
 		with open(path, "rt", encoding="utf-8") as f:
 			return f.read()
-	except Exception as e:
+	except Exception:
 		raise ValueError("Invalid repo")
 
 
@@ -148,11 +148,11 @@ def load_packages(text): # load packs from package file
 
 
 def make_graph(root, packages, dep, fl): # create dependations graph
-	def dfs(name, depth = dep, filter = fl):
+	def dfs(name, depth = dep, flt = fl):
 		if depth:
 			graph[name] = set()
 			for dep in packages.get(name, set()):
-				if filter not in dep:
+				if flt not in dep:
 					if dep not in graph:
 						dfs(dep, depth - 1)
 					if dep in seen:
@@ -196,9 +196,9 @@ def main(argv=None):
 		args = parse_args(argv)
 		validate_args(args)
 		if not args.repo_path:
-			pars = parse_repo_url(args.repo_url, args.package)
+			pars = parse_repo_url(args.repo_url)
 		else:
-			pars = parse_path_repo(args.repo_path, args.package)
+			pars = parse_path_repo(args.repo_path)
 		packs = load_packages(pars)
 		if args.package in packs:
 			graph = make_graph(args.package, packs, args.max_depth, args.filter_substr)
