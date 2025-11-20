@@ -50,7 +50,7 @@ def parse_args(argv=None): # Парсин аргументов
 	# Режим вывода в ASCII-дереве
 	parser.add_argument(
 		"--ascii-tree",
-		choices=["off", "simple", "detailed"],
+		choices=["off", "on"],
 		default="off"
 	)
 
@@ -211,6 +211,7 @@ def main(argv=None):
 						if j not in mas:
 							mas += [j]
 				print("\n".join(mas))
+
 			# planetUML http://editor.plantuml.com/
 			with open("grph.txt", 'w') as f:
 				graph_to_plantuml(graph, args.package)
@@ -218,7 +219,7 @@ def main(argv=None):
 				f.write("\n".join(d))
 				print("\n".join(d) + "\n")
 			# ascii-tree
-			if args.ascii_tree:
+			if args.ascii_tree == "on":
 				print_ascii_tree(graph, args.package)
 		else:
 			print("Пакет отсутствует")
